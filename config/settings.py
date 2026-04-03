@@ -10,7 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+# Load credentials from .env file
+class Credentials:
+    USER_NAME = os.environ.get('USER_NAME')
+    PASSWORD = os.environ.get('PASSWORD')
+    CLIENT_ID = os.environ.get('CLIENT_ID')
+    CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

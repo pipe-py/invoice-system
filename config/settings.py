@@ -11,18 +11,23 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
+import environ
 from pathlib import Path
 
 # Load credentials from .env file
-class Credentials:
-    USER_NAME = os.environ.get('USER_NAME')
-    PASSWORD = os.environ.get('PASSWORD')
-    CLIENT_ID = os.environ.get('CLIENT_ID')
-    CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
+env = environ.Env(
+    USER_NAME=(str, ""),
+    PASSWORD=(str, ""),
+    CLIENT_ID=(str, ""),
+    CLIENT_SECRET=(str, "")
+)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env into os.environ (Python/IPython do not read .env by themselves).
+environ.Env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
